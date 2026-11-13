@@ -1,6 +1,5 @@
 import java.util.*;
 
-/** Independent KMP scan for each pattern; counts overlapping occurrences. */
 public final class KMP {
     private KMP() {}
     private static int[] prefix(String p) {
