@@ -20,7 +20,6 @@ public final class Benchmark {
                     List<String> patterns = new ArrayList<>();
                     for (int p = 0; p < count; p++) patterns.add(randomString(r, 3 + r.nextInt(6)));
                     String text = randomString(r, size);
-                    // Warm-up (not recorded); avoid including compilation startup in results.
                     for (int w = 0; w < 3; w++) {
                         AhoCorasick warm = new AhoCorasick(patterns);
                         blackhole = warm.countMatches(text);
