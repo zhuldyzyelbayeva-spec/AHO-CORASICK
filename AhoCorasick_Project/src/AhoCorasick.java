@@ -1,6 +1,5 @@
 import java.util.*;
 
-/** Multi-pattern matching with a trie, failure links, and inherited outputs. */
 public final class AhoCorasick {
     private static final class Node {
         final Map<Character, Node> next = new HashMap<>();
@@ -57,7 +56,6 @@ public final class AhoCorasick {
                 while (fallback != root && !fallback.next.containsKey(c)) fallback = fallback.fail;
                 Node candidate = fallback.next.get(c);
                 child.fail = candidate == null ? root : candidate;
-                // Inherit suffix matches, including multiple patterns ending here.
                 child.outputs.addAll(child.fail.outputs);
                 queue.add(child);
             }
@@ -77,7 +75,6 @@ public final class AhoCorasick {
         return matches;
     }
 
-    /** Counts matches without allocating Match objects; used in benchmarks. */
     public long countMatches(String text) {
         Objects.requireNonNull(text);
         long count = 0;
